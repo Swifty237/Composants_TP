@@ -1,14 +1,21 @@
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
+import data from './assets/tp.json';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Image style={styles.picture} source={require('./assets/rover.jpg')}/>
-      <View style={styles.text}>
-        <Text style={styles.title}>Title: Michael FARADAY</Text>
-        <Text style={styles.description}>Description: Michael Faraday (Newington, 22 septembre 1791 - Hampton Court, 25 août 1867) est un physicien et un chimiste britannique.</Text>
-      </View>
-    </View>
+    data.map((obj) => (
+
+      <ScrollView>
+        <View style={styles.container}>
+          <Image style={styles.picture} source={{uri: obj.img}}/>
+          <View style={styles.text}>
+            <Text style={styles.title}>{obj.title}</Text>
+            <Text style={styles.description}>{obj.desc}</Text>
+          </View>
+        </View>
+      </ScrollView>
+      
+    ))
   );
 }
 
@@ -16,10 +23,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 2,
     flexDirection: "row",
+    borderWidth: 2,
+    margin: 10
   },
 
   picture: {
-    flex: 1, 
+    flex: 1,
+    margin: 10 
   },
 
   title: {
@@ -31,6 +41,6 @@ const styles = StyleSheet.create({
   },
 
   text: {
-    flex: 1
+    flex: 1,
   }
 });
